@@ -55,7 +55,10 @@ Route::get('/home/goods/{id}', function($id){
         $name = Auth::user()->name;
         $in_basket = Basket::where('user_id', Auth::user()->id)->where('goods_id', $id)->first();
     }
-    return view('goods', ['goods' => $goods, 'name' => $name, 'reviews' => $reviews, 'basket' => $in_basket]);
+
+    $imgs = explode(' ', $goods->img);
+
+    return view('goods', ['goods' => $goods, 'name' => $name, 'reviews' => $reviews, 'basket' => $in_basket, 'imgs' => $imgs]);
 });
 
 Route::group(['middleware' => ['role:admin']], function(){

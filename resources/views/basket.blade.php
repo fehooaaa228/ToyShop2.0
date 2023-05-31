@@ -28,7 +28,7 @@
                     @foreach($goods as $good)
                         <div class="shadow p-6 my-4">
                             <div class="flex justify-between">
-                                <div><img class="h-20" src="{{$good->img}}"></div>
+                                <div><img class="h-20" src="{{explode(' ', $good->img)[0]}}"></div>
                                 <div class="flex">
                                     <div class="mx-5 flex align-items-center">
                                         <span>
@@ -46,7 +46,7 @@
                     <div class="w-100 flex justify-content-end p-3">
                         <div><p class="h3">Итого: {{$price}}₽</p></div>
                     </div>
-                @else 
+                @else
                     <div class="my-5 pb-5 px-5">
                         <p class="h3">У вас в корзине пока нет товаров</p>
                     </div>

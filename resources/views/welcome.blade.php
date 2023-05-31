@@ -40,17 +40,17 @@
                             <div class="col-4 my-3">
                                 <a href="/home/goods/{{$i->id}}">
                                     <div class="goods border rounded-3 p-3">
-                                        <img class="mb-3" src="{{$i->img}}">
+                                        <img class="mb-3" src="{{explode(' ', $i->img)[0]}}">
                                         <p class="h1">{{$i->name}}</p>
                                         <p class="h3">{{$i->price}}₽</p>
-                                        @auth 
+                                        @auth
                                             @hasrole('admin')
                                                 <a href="http://127.0.0.1:8000/api/delete_goods?id={{$i->id}}" class="btn btn-danger position-relative">Удалить</a>
                                             @endhasrole
                                         @endauth
                                     </div>
                                 </a>
-                            </div>  
+                            </div>
                         @endforeach
                     </div>
                 </div>
@@ -66,5 +66,7 @@
 
             </div>
         </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     </body>
 </html>

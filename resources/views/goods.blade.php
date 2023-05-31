@@ -29,20 +29,40 @@
                             <p class="text-muted mb-2"><a href="{{url('/')}}">Главная</a>/<u>{{$goods->name}}</u></p>
                     @endauth
                     <div class="flex mb-4">
-                        <div>
-                            <img style="max-width: 600px;" class="thumbnail" src="../../{{$goods->img}}">
+                        <div id="carouselExampleDark" class="carousel carousel-dark slide container" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                @for($i = 0; $i < count($imgs) - 1; $i++)
+                                    @if($i == 0)
+                                        <div class="carousel-item active w-100">
+                                            <img src="../../{{$imgs[$i]}}" class="d-block" alt="">
+                                        </div>
+                                    @else
+                                        <div class="carousel-item w-100">
+                                                <img src="../../{{$imgs[$i]}}" class="d-block" alt="">
+                                        </div>
+                                    @endif
+                                @endfor
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
                         </div>
-                        <div class="p-6 mx-3">
-                            <p class="h1">{{$goods->name}}</p>
-                            <p class="h3">{{$goods->price}}₽</p>
+                        <div class="p-6 mx-3 h-100 container">
+                                <p class="h1">{{$goods->name}}</p>
+                                <p class="h3">{{$goods->price}}₽</p>
 
-                            @auth 
-                                @if($basket == null)
-                                    <a href="http://127.0.0.1:8000/api/add_to_busket?user={{Auth::user()->id}}&goods={{$goods->id}}" class="btn btn-primary my-3 p-3"><p class="h5 m-0">В корзину</p></a>
-                                    @else 
-                                        <div class="btn btn-primary my-3 p-3 disabled"><p class="h5 m-0">В корзине</p></div>
-                                @endif 
-                            @endauth
+                                @auth
+                                    @if($basket == null)
+                                        <a href="http://127.0.0.1:8000/api/add_to_busket?user={{Auth::user()->id}}&goods={{$goods->id}}" class="btn btn-primary my-3 p-3"><p class="h5 m-0">В корзину</p></a>
+                                        @else
+                                            <div class="btn btn-primary my-3 p-3 disabled"><p class="h5 m-0">В корзине</p></div>
+                                    @endif
+                                @endauth
                         </div>
                     </div>
 
@@ -58,8 +78,8 @@
                                 <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Отправить</button>
                             </div>
                         </form>
-                        @else 
-                            <p class="h4 my-3">Зарегистрируйтесь или войдите чтобы оставлять отзывы</p>  
+                        @else
+                            <p class="h4 my-3">Зарегистрируйтесь или войдите чтобы оставлять отзывы</p>
                     @endauth
 
                     @foreach($reviews as $review)
@@ -71,9 +91,11 @@
                 </div>
             </main>
 
-            <div class="w-100 h-20 bg-dark" style="margin-top: 100px; height: 130px;">
+            <div class="w-100 h-20 bg-dark" style="margin-top: 100px; height: 170px;">
 
             </div>
+
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
         </div>
     </body>
 </html>

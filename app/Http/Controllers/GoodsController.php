@@ -42,13 +42,18 @@ class GoodsController extends Controller
 
         $good->name = $request->name;
         $good->price = $request->price;
-        $imgName = time().'.'.$request->image->extension();
-        $request->image->move(public_path('img'), $imgName);
-        $good->img = 'img/'.$imgName;
+        $imgs = "";
+        foreach($request->images as $img) {
+            $imgName = $img->getClientOriginalName();
+            $img->move(public_path('img'), $imgName);
+            $imgs .= 'img/'.$imgName.' ';
+        }
+
+        $good->img = $imgs;
 
         $good->save();
 
-        return redirect()->back()->withSuccess('Goods has been added successfully');
+        return redirect()->back();
     }
 
     public function delete_goods(Request $request){

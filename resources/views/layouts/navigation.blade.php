@@ -9,7 +9,7 @@
                     <a href="{{ url('home') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                     </a>
-                    @else 
+                    @else
                     <a href="{{ url('') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                     </a>
@@ -54,11 +54,122 @@
                         </div>
                     @else
                     <div class="h-100 flex align-items-center">
-                        <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Войти</a>
-                        <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Зарегистрироваться</a>
+                        {{--<a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Войти</a>
+                        <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Зарегистрироваться</a>--}}
+                        <div class="flex align-items-center">
+                            <a class="btn btn-outline-dark mx-2" data-bs-toggle="offcanvas" href="#offcanvasLogin" role="button" aria-controls="offcanvasExample">
+                                Войти
+                            </a>
+
+                            <a class="btn btn-outline-dark mx-2" data-bs-toggle="offcanvas" href="#offcanvasRegister" role="button" aria-controls="offcanvasExample">
+                                Зарегистрироваться
+                            </a>
+                        </div>
+
+                        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasLogin" aria-labelledby="offcanvasExampleLabel">
+                            <div class="offcanvas-header">
+                                <p class="h2" class="offcanvas-title" id="offcanvasExampleLabel">Вход</p>
+                            </div>
+                            <div class="offcanvas-body">
+                                <x-auth-session-status class="mb-4" :status="session('status')" />
+
+                                <form method="POST" action="{{ route('login') }}">
+                                    @csrf
+
+                                    <!-- Email Address -->
+                                    <div>
+                                        <x-input-label for="email" :value="__('Почта')" />
+                                        <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+                                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                                    </div>
+
+                                    <!-- Password -->
+                                    <div class="mt-4">
+                                        <x-input-label for="password" :value="__('Пароль')" />
+
+                                        <x-text-input id="password" class="block mt-1 w-full"
+                                                      type="password"
+                                                      name="password"
+                                                      required autocomplete="current-password" />
+
+                                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                                    </div>
+
+                                    <!-- Remember Me -->
+                                    <div class="block mt-4">
+                                        <label for="remember_me" class="inline-flex items-center">
+                                            <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
+                                            <span class="ml-2 text-sm text-gray-600">{{ __('Запомнить меня') }}</span>
+                                        </label>
+                                    </div>
+
+                                    <div class="flex items-center justify-end mt-4">
+                                        @if (Route::has('password.request'))
+                                            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
+                                                {{ __('Забыли пароль?') }}
+                                            </a>
+                                        @endif
+
+                                        <button class="btn btn-dark ml-3">Войти</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasRegister" aria-labelledby="offcanvasExampleLabel">
+                            <div class="offcanvas-header">
+                                <p class="h2" class="offcanvas-title" id="offcanvasExampleLabel">Регистрация</p>
+                            </div>
+                            <div class="offcanvas-body">
+                                <form method="POST" action="{{ route('register') }}">
+                                    @csrf
+
+                                    <!-- Name -->
+                                    <div>
+                                        <x-input-label for="name" :value="__('Имя')" />
+                                        <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+                                        <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                                    </div>
+
+                                    <!-- Email Address -->
+                                    <div class="mt-4">
+                                        <x-input-label for="email" :value="__('Почта')" />
+                                        <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
+                                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                                    </div>
+
+                                    <!-- Password -->
+                                    <div class="mt-4">
+                                        <x-input-label for="password" :value="__('Пароль')" />
+
+                                        <x-text-input id="password" class="block mt-1 w-full"
+                                                      type="password"
+                                                      name="password"
+                                                      required autocomplete="new-password" />
+
+                                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                                    </div>
+
+                                    <!-- Confirm Password -->
+                                    <div class="mt-4">
+                                        <x-input-label for="password_confirmation" :value="__('Подтвердите пароль')" />
+
+                                        <x-text-input id="password_confirmation" class="block mt-1 w-full"
+                                                      type="password"
+                                                      name="password_confirmation" required autocomplete="new-password" />
+
+                                        <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+                                    </div>
+
+                                    <div class="flex items-center justify-end mt-4">
+                                        <button class="btn btn-dark ml-3">Зарегистрироваться</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 @endauth
             </div>
         </div>
-    </div> 
+    </div>
 </nav>
