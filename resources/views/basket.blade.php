@@ -37,7 +37,7 @@
                                         </span>
                                     </div>
                                     <div class="flex align-items-center">
-                                        <a class="text-danger" href="http://127.0.0.1:8000/api/delete_from_basket?id={{$good->id}}">Удалить</a>
+                                        <a class="text-danger" href="/api/delete_from_basket?id={{$good->id}}">Удалить</a>
                                     </div>
                                 </div>
                             </div>

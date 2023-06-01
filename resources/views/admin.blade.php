@@ -5,4 +5,4 @@
     <input type="submit" value="Добавить">
 </form>
 
-<a class="btn btn-outline-primary" href="{{url('home')}}">Главная</a>
+<a href="{{url('home')}}">Главная</a>

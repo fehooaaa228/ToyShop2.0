@@ -118,7 +118,7 @@
 
                         <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasRegister" aria-labelledby="offcanvasExampleLabel">
                             <div class="offcanvas-header">
-                                <p class="h2" class="offcanvas-title" id="offcanvasExampleLabel">Регистрация</p>
+                                <p class="h2 offcanvas-title" id="offcanvasExampleLabel">Регистрация</p>
                             </div>
                             <div class="offcanvas-body">
                                 <form method="POST" action="{{ route('register') }}">

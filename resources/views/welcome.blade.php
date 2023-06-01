@@ -37,7 +37,7 @@
                     <p class="text-muted"><u>Главная</u></p>
                     <div class="row">
                         @foreach($goods as $i)
-                            <div class="col-4 my-3">
+                            <div class="col-sm-4 my-3">
                                 <a href="/home/goods/{{$i->id}}">
                                     <div class="goods border rounded-3 p-3">
                                         <img class="mb-3" src="{{explode(' ', $i->img)[0]}}">
@@ -45,7 +45,7 @@
                                         <p class="h3">{{$i->price}}₽</p>
                                         @auth
                                             @hasrole('admin')
-                                                <a href="http://127.0.0.1:8000/api/delete_goods?id={{$i->id}}" class="btn btn-danger position-relative">Удалить</a>
+                                                <a href="/api/delete_goods?id={{$i->id}}" class="btn btn-danger position-relative">Удалить</a>
                                             @endhasrole
                                         @endauth
                                     </div>
